@@ -8,12 +8,15 @@ import {
   Put,
   Query,
   ValidationPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { RoleService } from './role.service';
 import { Types } from 'mongoose';
 import { Role } from './role.schema';
 import { CreateRoleDTO } from './dto/create-role.dto';
+import { AuthGuard } from '@nestjs/passport';
 
+@UseGuards(AuthGuard('jwt'))
 @Controller('role')
 export class RoleController {
   constructor(private readonly roleService: RoleService) {}
